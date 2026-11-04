@@ -1,0 +1,99 @@
+:root {
+  --bg: #1b1d22;
+  --tile: #2a2d34;
+  --text: #e8e8e8;
+  --muted: #9aa0aa;
+  --accent: #6cb4ff;
+  --gap: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.4 system-ui, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 8px var(--gap);
+}
+
+h1 { font-size: 18px; margin: 0; }
+#count { color: var(--muted); flex: 1; }
+label { display: flex; align-items: center; gap: .5rem; color: var(--muted); }
+
+main {
+  display: grid;
+  grid-template-columns: repeat(var(--across, 4), minmax(0, 1fr));
+  gap: var(--gap);
+  padding: 0 var(--gap) var(--gap);
+}
+
+.tile {
+  background: var(--tile);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tile-bar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 4px 8px;
+}
+
+.tile-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile-name { color: var(--muted); font-size: 12px; }
+
+.tile-bar button, .tile-bar a {
+  background: none;
+  border: 1px solid var(--muted);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  padding: 1px 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tile-bar button:hover, .tile-bar a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* The area runs in a 1280x800 window, scaled to the tile's width (ADR 0003). */
+.tile-view {
+  position: relative;
+  aspect-ratio: 1280 / 800;
+  overflow: hidden;
+  background: #fff;
+}
+
+.tile-view iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 800px;
+  border: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--scale, 0.25));
+}
+
+.tile-view iframe:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  transform: none;
+}
+
+.empty { color: var(--muted); padding: var(--gap); }
